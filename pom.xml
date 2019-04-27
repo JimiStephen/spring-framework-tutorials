@@ -6,7 +6,7 @@
     <artifactId>tutorials-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-
+        <module>tutorials-core</module>
     </modules>
     <packaging>pom</packaging>
     <!-- Additional lines to be added here... -->
