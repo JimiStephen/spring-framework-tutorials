@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+    The Spring IoC container can manage virtually any class you want it to manage. It is not limited to managing true JavaBeans.
+    Most Spring users prefer actual JavaBeans with only a default (no-argument) constructor
+    and appropriate setters and getters modeled after the properties in the container.
+    -->
+    <bean id="exampleForIdBean" class="com.jimi.springframework.beans.ExampleForIdBean"/>
+
+    <bean name="anotherExample" class="com.jimi.springframework.beans.ExampleForNameBean"/>
+
+    <!--
+    The following bean definition specifies that the bean be created by calling a factory method.
+     The definition does not specify the type (class) of the returned object, only the class containing the factory method.
+    -->
+    <bean id="clientService"
+          class="com.jimi.springframework.beans.ClientService"
+          factory-method="createInstance"/>
+
+
+    <!-- the factory bean, which contains a method called createInstance() -->
+    <bean id="serviceLocator" class="com.jimi.springframework.beans.DefaultServiceLocator">
+        <!-- inject any dependencies required by this locator bean --></bean>
+
+    <!-- the bean to be created via the factory bean -->
+    <bean id="clientBeanService"
+          factory-bean="serviceLocator"
+          factory-method="createClientServiceInstance"/>
+
+    <bean id="accountService"
+          factory-bean="serviceLocator"
+          factory-method="createAccountServiceInstance"/>
+
+</beans>
